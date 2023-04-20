@@ -1,0 +1,68 @@
+male(yuhang).
+male(youlin).
+male(youquan).
+male(wei).
+male(du).
+male(heng).
+male(yueyang).
+male(anran).
+male(jiayan).
+female(li).
+female(yuxi).
+female(youping).
+female(jun).
+female(yue).
+female(shuang).
+female(lu).
+female(yi).
+father(youlin, yuhang).
+father(tinggao, youlin).
+father(dayou, li).
+father(youlin, yuxi).
+father(tinggao, youquan).
+father(tinggao, youping).
+father(dayou, jun).
+father(dayou, wei).
+father(youquan, yue).
+father(tao, du).
+father(qingming, lu).
+father(qingming, heng).
+father(wei, yi).
+father(wei, yi).
+father(shengqiang, anran).
+father(hang, jiayan).
+mother(li, yuhang).
+mother(longhui, youlin).
+mother(daobi, li).
+mother(li, yuxi).
+mother(longhui, youquan).
+mother(longhui, youping).
+mother(daobi, jun).
+mother(daobi, wei).
+mother(yuehong, yue).
+mother(youping, du).
+mother(youping, shuang).
+mother(jun, lu).
+mother(jun, heng).
+mother(xiujuan, yi).
+mother(xiujuan, yi).
+mother(lu, anran).
+mother(yi, jiayan).
+lover(yesha, yuhang).
+lover(jiefu, yue).
+spouse(jiafeng, wei).
+spouse(xiaoou, du).
+
+male(X) :- father(X, Y), !.
+female(X) :- mother(X, Y), !.
+parent(X, Y) :- father(X, Y); mother(X, Y).
+child(X, Y) :- father(Y, X); mother(Y, X).
+son(X, Y) :- child(X, Y), male(X).
+daughter(X, Y) :- child(X, Y), female(X).
+grandfather(X, Y) :- father(X, Z), parent(Z, Y).
+grandmother(X, Y) :- mother(X, Z), parent(Z, Y).
+sibling(X, Y) :- parent(Z, X), parent(Z, Y), X\=Y.
+uncle(X, Y) :- male(X), parent(Z, Y), sibling(X, Z).
+aunt(X, Y) :- female(X), parent(Z, Y), sibling(X, Z).
+cousin(X, Y) :- parent(Z, X), parent(W, Y), sibling(Z, W).
+spouse(X, Y) :- child(Z, X), child(Z, Y), X\=Y.
